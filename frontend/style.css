@@ -1,0 +1,181 @@
+/* ===============================
+   GLOBAL
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background: radial-gradient(circle at top, #0b1d2a, #020617);
+  color: #f5f5f5;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #111827, #020617);
+  border-bottom: 2px solid #1f2937;
+}
+
+.hero h1 {
+  margin-bottom: 10px;
+}
+
+.hero button {
+  margin: 10px;
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #facc15;
+  border: none;
+  border-radius: 6px;
+}
+
+.hero button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+#walletAddress {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ===============================
+   SECTIONS
+================================ */
+section {
+  padding: 30px 40px;
+}
+
+section h2 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 10px;
+}
+
+/* ===============================
+   NFT GRID (HORIZONTAL!)
+================================ */
+.grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+/* scrollbar styling */
+.grid::-webkit-scrollbar {
+  height: 8px;
+}
+.grid::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 10px;
+}
+
+/* ===============================
+   NFT CARD
+================================ */
+.nft {
+  min-width: 240px;
+  background: linear-gradient(180deg, #020617, #020617);
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nft:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 35px rgba(250, 204, 21, 0.35);
+}
+
+.nft img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.nft h3 {
+  margin: 6px 0;
+}
+
+.nft p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.nft button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: #22c55e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nft button:hover {
+  background: #16a34a;
+}
+
+/* ===============================
+   MODALS
+================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-box {
+  background: #020617;
+  padding: 25px;
+  width: 320px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+}
+
+.modal-box input,
+.modal-box textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.button-row button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.danger {
+  background: #dc2626;
+  color: white;
+}
