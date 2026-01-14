@@ -1,10 +1,8 @@
-// Contract interaction layer
 let provider;
 let signer;
 let userAddress;
 let contract;
 
-// Replace with deployed address from Hardhat
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 const contractABI = [
@@ -15,31 +13,32 @@ const contractABI = [
 ];
 
 async function connectWallet() {
-    if (!window.ethereum) return alert("MetaMask not found");
+  if (!window.ethereum) return alert("Install MetaMask");
 
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    signer = provider.getSigner();
-    userAddress = await signer.getAddress();
-    contract = new ethers.Contract(contractAddress, contractABI, signer);
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  signer = provider.getSigner();
+  userAddress = await signer.getAddress();
+
+  contract = new ethers.Contract(contractAddress, contractABI, signer);
 }
 
 async function mintNFT(tokenURI) {
-    const tx = await contract.mint(tokenURI);
-    await tx.wait();
+  const tx = await contract.mint(tokenURI);
+  await tx.wait();
 }
 
-async function sellNFT(tokenId, priceInEth) {
-    const price = ethers.utils.parseEther(priceInEth);
-    const tx = await contract.sell(tokenId, price);
-    await tx.wait();
+async function sellNFT(tokenId, priceEth) {
+  const price = ethers.utils.parseEther(priceEth);
+  const tx = await contract.sell(tokenId, price);
+  await tx.wait();
 }
 
 async function buyNFT(tokenId, price) {
-    const tx = await contract.buy(tokenId, { value: price });
-    await tx.wait();
+  const tx = await contract.buy(tokenId, { value: price });
+  await tx.wait();
 }
 
 async function getCollection() {
-    return await contract.getCollection();
+  return await contract.getCollection();
 }
