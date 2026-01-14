@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Olympus NFT Marketplace</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <h1>Olympus NFT Marketplace</h1>
+  <button id="connectWallet">Connect Wallet</button>
+</header>
+
+<p id="walletAddress"></p>
+
+<section id="mintSection">
+  <input id="tokenURI" placeholder="Token URI (e.g., zeus.json)">
+  <button id="mintNFT">Mint NFT</button>
+</section>
+
+<section>
+  <h2>Marketplace</h2>
+  <div id="marketplace" class="nft-grid"></div>
+</section>
+
+<section>
+  <h2>My NFTs</h2>
+  <div id="myNfts" class="nft-grid"></div>
+</section>
+
+<footer>
+  <p>Powered by Hardhat & Ethereum Local Network</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script src="app.js"></script>
+<script src="frontend.js"></script>
+
+</body>
+</html>

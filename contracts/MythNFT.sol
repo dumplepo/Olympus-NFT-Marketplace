@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MythNFT is ERC721URIStorage, Ownable {
-    uint256 public tokenCount; // track minted NFTs
+    uint256 public nextTokenId = 1;
 
     struct NFTItem {
         uint256 tokenId;
@@ -14,54 +14,47 @@ contract MythNFT is ERC721URIStorage, Ownable {
         bool forSale;
     }
 
-    mapping(uint256 => NFTItem) public nftList; // all NFTs
+    mapping(uint256 => NFTItem) public nftList;
 
-    constructor() ERC721("GreekMythNFT", "GMNFT") Ownable(msg.sender) {}
+    constructor() ERC721("MythNFT", "MYTH") Ownable(msg.sender) {}
 
-    // Mint NFT
-    function mint(string memory tokenURI) public {
-        tokenCount++;
-        _safeMint(msg.sender, tokenCount);
-        _setTokenURI(tokenCount, tokenURI);
+    function mint(string memory tokenURI) external {
+        uint256 tokenId = nextTokenId;
+        _mint(msg.sender, tokenId);
+        _setTokenURI(tokenId, tokenURI);
 
-        nftList[tokenCount] = NFTItem({
-            tokenId: tokenCount,
-            owner: msg.sender,
-            price: 0,
-            forSale: false
-        });
+        nftList[tokenId] = NFTItem(tokenId, msg.sender, 0, false);
+        nextTokenId++;
     }
 
-    // Put NFT for sale
-    function sell(uint256 tokenId, uint256 price) public {
+    function sell(uint256 tokenId, uint256 price) external {
         require(ownerOf(tokenId) == msg.sender, "Not owner");
-        require(price > 0, "Price must be > 0");
         nftList[tokenId].price = price;
         nftList[tokenId].forSale = true;
     }
 
-    // Buy NFT
-    function buy(uint256 tokenId) public payable {
+    function buy(uint256 tokenId) external payable {
         NFTItem storage item = nftList[tokenId];
         require(item.forSale, "Not for sale");
         require(msg.value >= item.price, "Insufficient ETH");
+        require(item.owner != msg.sender, "Cannot buy your own NFT");
 
-        address oldOwner = ownerOf(tokenId);
-        _transfer(oldOwner, msg.sender, tokenId);
-
-        (bool sent, ) = oldOwner.call{value: msg.value}("");
-        require(sent, "Failed to send Ether");
+        address seller = item.owner;
+        _transfer(seller, msg.sender, tokenId);
 
         item.owner = msg.sender;
         item.forSale = false;
+        item.price = 0;
+
+        (bool success, ) = payable(seller).call{value: msg.value}("");
+        require(success, "ETH transfer failed");
     }
 
-    // Show collection of NFTs
-    function getCollection() public view returns (NFTItem[] memory) {
-        NFTItem[] memory collection = new NFTItem[](tokenCount);
-        for (uint256 i = 1; i <= tokenCount; i++) {
-            collection[i-1] = nftList[i];
+    function getCollection() external view returns (NFTItem[] memory) {
+        NFTItem[] memory items = new NFTItem[](nextTokenId - 1);
+        for (uint256 i = 1; i < nextTokenId; i++) {
+            items[i-1] = nftList[i];
         }
-        return collection;
+        return items;
     }
 }
