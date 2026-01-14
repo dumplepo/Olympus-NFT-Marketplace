@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background: url('img/background.png') no-repeat center fixed;
+  background-size: cover;
+  color: white;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: rgba(0,0,0,0.75);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: gold;
+  text-shadow: 0 0 20px gold;
+}
+
+/* BUTTONS */
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+button {
+  background: linear-gradient(135deg, gold, orange);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 25px gold;
+}
+
+button.danger {
+  background: linear-gradient(135deg, crimson, darkred);
+}
+
+/* SECTIONS */
+section {
+  padding: 30px 40px;
+}
+
+h2 {
+  color: gold;
+}
+
+/* NFT GRID */
+.nft-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* NFT CARD */
+.nft {
+  width: 190px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 15px;
+  padding: 12px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.nft:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px gold;
+}
+
+.nft img {
+  width: 150px;
+  border-radius: 10px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: #111;
+  padding: 30px;
+  border-radius: 15px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 0 40px gold;
+}
+
+.modal-box input,
+.modal-box textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+textarea {
+  resize: none;
+  height: 60px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.6);
+  color: gold;
+}

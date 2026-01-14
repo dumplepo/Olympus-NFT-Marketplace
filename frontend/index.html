@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Olympus NFT Marketplace</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="hero">
+  <h1>⚡ Olympus NFT Marketplace ⚡</h1>
+  <p>Mint • Trade • Rule the Gods</p>
+
+  <div class="button-row">
+    <button id="connectWallet">Connect Wallet</button>
+    <button id="openMint">Mint NFT</button>
+  </div>
+
+  <p id="walletAddress"></p>
+</header>
+
+<section>
+  <h2>🏛 Marketplace</h2>
+  <div id="marketplace" class="nft-grid"></div>
+</section>
+
+<section>
+  <h2>👤 My NFTs</h2>
+  <div id="myNfts" class="nft-grid"></div>
+</section>
+
+<!-- 🔮 MINT MODAL -->
+<div id="mintModal" class="modal">
+  <div class="modal-box">
+    <h2>Mint New NFT</h2>
+
+    <input id="mintName" placeholder="NFT Name">
+    <textarea id="mintDesc" placeholder="NFT Description"></textarea>
+    <input id="tokenURI" placeholder="Token URI">
+
+    <div class="button-row">
+      <button onclick="confirmMint()">Mint</button>
+      <button class="danger" onclick="closeModal('mintModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- 💰 SELL MODAL -->
+<div id="sellModal" class="modal">
+  <div class="modal-box">
+    <h2>Sell NFT</h2>
+
+    <textarea id="sellDesc" placeholder="Selling Description"></textarea>
+    <input id="sellPrice" placeholder="Price in ETH">
+
+    <div class="button-row">
+      <button onclick="confirmSell()">Sell</button>
+      <button class="danger" onclick="closeModal('sellModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Forged on Ethereum • Powered by Hardhat</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+<script src="app.js"></script>
+<script src="frontend.js"></script>
+
+</body>
+</html>
