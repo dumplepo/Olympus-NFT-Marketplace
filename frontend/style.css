@@ -179,3 +179,23 @@ section h2 {
   background: #dc2626;
   color: white;
 }
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  padding: 8px 14px;
+  background: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background: #facc15;
+  color: black;
+}

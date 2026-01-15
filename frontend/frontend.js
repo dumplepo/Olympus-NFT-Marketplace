@@ -1,5 +1,16 @@
 let selectedTokenId = null;
 
+
+
+let activeFilter = "ALL";
+
+function setFilter(type) {
+  activeFilter = type;
+  renderCollections();
+}
+
+
+
 // =======================
 // PINATA CONFIG
 // =======================
@@ -90,6 +101,13 @@ async function renderCollections() {
     const uri = await contract.tokenURI(tokenId);
     const metaRes = await fetch(ipfsToHttp(uri));
     const meta = await metaRes.json();
+    if (
+      activeFilter !== "ALL" &&
+      meta.category !== activeFilter
+    ) {
+      continue;
+    }
+
 
     const card = document.createElement("div");
     card.className = "nft";
@@ -164,10 +182,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const imageURI = await uploadToPinata(file);
+      const category = document.getElementById("mintCategory").value;
+
       const metadataURI = await uploadMetadataToPinata({
         name,
         description: desc,
-        image: imageURI
+        image: imageURI,
+        category
       });
 
       await mintNFT(metadataURI);

@@ -22,6 +22,18 @@
             <h2>Status</h2>
             <p id="status">Waiting for wallet connection...</p>
         </section>
+
+        <section>
+            <h2>Filter</h2>
+            <div class="filters">
+                <button onclick="setFilter('ALL')">All</button>
+                <button onclick="setFilter('God')">Gods</button>
+                <button onclick="setFilter('Titan')">Titans</button>
+                <button onclick="setFilter('Hero')">Heroes</button>
+            </div>
+        </section>
+
+
         <section>
             <h2>Marketplace</h2>
             <div id="marketplace" class="grid"></div>
@@ -46,6 +58,14 @@
                 <h2>Mint NFT</h2>
                 <input id="mintName" placeholder="NFT Name">
                 <textarea id="mintDesc" placeholder="NFT Description"></textarea>
+
+                <select id="mintCategory">
+                    <option value="God">God</option>
+                    <option value="Titan">Titan</option>
+                    <option value="Hero">Hero</option>
+                </select>
+
+
                 <input type="file" id="mintImage" accept="image/*">
                 <img id="imagePreview" style="display:none; width:150px; margin-top:10px;">
                 <div class="button-row">
