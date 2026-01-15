@@ -1,74 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Olympus NFT Marketplace</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Olympus NFT Marketplace</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
 
-<header class="hero">
-  <h1>⚡ Olympus NFT Marketplace ⚡</h1>
-  <p>Mint • Trade • Rule the Gods</p>
+        <header class="hero">
+            <h1>⚡ Olympus NFT Marketplace ⚡</h1>
+            <p>Greek Mythology NFT dApp</p>
 
-  <div class="button-row">
-    <button id="connectWallet">Connect Wallet</button>
-    <button id="openMint">Mint NFT</button>
-  </div>
+            <button id="connectWallet">Connect Wallet</button>
+            <button id="openMint" disabled>Mint NFT</button>
+            <p id="walletAddress">Not connected</p>
+        </header>
 
-  <p id="walletAddress"></p>
-</header>
+        <section>
+            <h2>Status</h2>
+            <p id="status">Waiting for wallet connection...</p>
+        </section>
+        <section>
+            <h2>Marketplace</h2>
+            <div id="marketplace" class="grid"></div>
+        </section>
 
-<section>
-  <h2>🏛 Marketplace</h2>
-  <div id="marketplace" class="nft-grid"></div>
-</section>
+        <section>
+            <h2>My NFTs</h2>
+            <div id="myNfts" class="grid"></div>
+        </section>
 
-<section>
-  <h2>👤 My NFTs</h2>
-  <div id="myNfts" class="nft-grid"></div>
-</section>
 
-<!-- 🔮 MINT MODAL -->
-<div id="mintModal" class="modal">
-  <div class="modal-box">
-    <h2>Mint New NFT</h2>
+        <!-- ethers v5 (frontend stays v5 for simplicity) -->
+        <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+        <script src="app.js"></script>
+        <script src="frontend.js"></script>
 
-    <input id="mintName" placeholder="NFT Name">
-    <textarea id="mintDesc" placeholder="NFT Description"></textarea>
-    <input id="tokenURI" placeholder="Token URI">
 
-    <div class="button-row">
-      <button onclick="confirmMint()">Mint</button>
-      <button class="danger" onclick="closeModal('mintModal')">Cancel</button>
-    </div>
-  </div>
-</div>
 
-<!-- 💰 SELL MODAL -->
-<div id="sellModal" class="modal">
-  <div class="modal-box">
-    <h2>Sell NFT</h2>
+        <!-- Mint Modal -->
+        <div id="mintModal" class="modal">
+            <div class="modal-box">
+                <h2>Mint NFT</h2>
+                <input id="mintName" placeholder="NFT Name">
+                <textarea id="mintDesc" placeholder="NFT Description"></textarea>
+                <input type="file" id="mintImage" accept="image/*">
+                <img id="imagePreview" style="display:none; width:150px; margin-top:10px;">
+                <div class="button-row">
+                <button id="confirmMintBtn">Mint</button>
+                <button class="danger" onclick="closeModal('mintModal')">Cancel</button>
+                </div>
+            </div>
+        </div>
 
-    <textarea id="sellDesc" placeholder="Selling Description"></textarea>
-    <input id="sellPrice" placeholder="Price in ETH">
+        <!-- Sell Modal -->
+        <div id="sellModal" class="modal">
+            <div class="modal-box">
+                <h2>Sell NFT</h2>
+                <input id="sellPrice" placeholder="Price in ETH">
+                <div class="button-row">
+                <button id="confirmSellBtn">Sell</button>
+                <button class="danger" onclick="closeModal('sellModal')">Cancel</button>
+                </div>
+            </div>
+        </div>
 
-    <div class="button-row">
-      <button onclick="confirmSell()">Sell</button>
-      <button class="danger" onclick="closeModal('sellModal')">Cancel</button>
-    </div>
-  </div>
-</div>
 
-<footer>
-  <p>Forged on Ethereum • Powered by Hardhat</p>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-<script src="app.js"></script>
-<script src="frontend.js"></script>
-
-</body>
+    </body>
 </html>

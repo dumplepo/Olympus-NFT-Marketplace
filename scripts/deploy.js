@@ -1,13 +1,16 @@
-const { ethers } = require("hardhat");
+const hre = require("hardhat");
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
-  console.log("Deploying contracts with account:", deployer.address);
+  const [deployer] = await hre.ethers.getSigners();
 
-  const MythNFT = await ethers.getContractFactory("MythNFT");
-  const mythNFT = await MythNFT.deploy(); // already deployed
+  console.log("Deploying with:", deployer.address);
 
-  console.log("MythNFT deployed to:", mythNFT.target); // v6 uses .target, not .address
+  const MythNFT = await hre.ethers.getContractFactory("MythNFT");
+  const mythNFT = await MythNFT.deploy();
+
+  await mythNFT.waitForDeployment();
+
+  console.log("MythNFT deployed to:", await mythNFT.getAddress());
 }
 
 main().catch((error) => {

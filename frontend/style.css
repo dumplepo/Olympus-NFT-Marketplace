@@ -1,124 +1,181 @@
+/* ===============================
+   GLOBAL
+================================ */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Cinzel', serif;
-  background: url('img/background.png') no-repeat center fixed;
-  background-size: cover;
-  color: white;
+  background: radial-gradient(circle at top, #0b1d2a, #020617);
+  color: #f5f5f5;
 }
 
-/* HERO */
+/* ===============================
+   HEADER
+================================ */
 .hero {
   text-align: center;
-  padding: 80px 20px;
-  background: rgba(0,0,0,0.75);
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #111827, #020617);
+  border-bottom: 2px solid #1f2937;
 }
 
 .hero h1 {
-  font-size: 3rem;
-  color: gold;
-  text-shadow: 0 0 20px gold;
+  margin-bottom: 10px;
 }
 
-/* BUTTONS */
-.button-row {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-button {
-  background: linear-gradient(135deg, gold, orange);
-  border: none;
-  padding: 12px 22px;
-  border-radius: 10px;
-  font-weight: bold;
+.hero button {
+  margin: 10px;
+  padding: 10px 18px;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  background: #facc15;
+  border: none;
+  border-radius: 6px;
 }
 
-button:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 0 25px gold;
+.hero button:disabled {
+  background: #555;
+  cursor: not-allowed;
 }
 
-button.danger {
-  background: linear-gradient(135deg, crimson, darkred);
+#walletAddress {
+  margin-top: 10px;
+  font-size: 14px;
 }
 
-/* SECTIONS */
+/* ===============================
+   SECTIONS
+================================ */
 section {
   padding: 30px 40px;
 }
 
-h2 {
-  color: gold;
+section h2 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 10px;
 }
 
-/* NFT GRID */
-.nft-grid {
+/* ===============================
+   NFT GRID (HORIZONTAL!)
+================================ */
+.grid {
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
 }
 
-/* NFT CARD */
+/* scrollbar styling */
+.grid::-webkit-scrollbar {
+  height: 8px;
+}
+.grid::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 10px;
+}
+
+/* ===============================
+   NFT CARD
+================================ */
 .nft {
-  width: 190px;
-  background: rgba(0,0,0,0.8);
-  border-radius: 15px;
-  padding: 12px;
+  min-width: 240px;
+  background: linear-gradient(180deg, #020617, #020617);
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 16px;
   text-align: center;
-  transition: 0.3s;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .nft:hover {
   transform: translateY(-6px);
-  box-shadow: 0 0 25px gold;
+  box-shadow: 0 0 35px rgba(250, 204, 21, 0.35);
 }
 
 .nft img {
-  width: 150px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
-/* MODAL */
+.nft h3 {
+  margin: 6px 0;
+}
+
+.nft p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.nft button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: #22c55e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nft button:hover {
+  background: #16a34a;
+}
+
+/* ===============================
+   MODALS
+================================ */
 .modal {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
+  background: rgba(0,0,0,0.75);
+  display: none;
   align-items: center;
+  justify-content: center;
+  z-index: 100;
 }
 
 .modal-box {
-  background: #111;
-  padding: 30px;
-  border-radius: 15px;
+  background: #020617;
+  padding: 25px;
   width: 320px;
-  text-align: center;
-  box-shadow: 0 0 40px gold;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
 }
 
 .modal-box input,
 .modal-box textarea {
   width: 100%;
-  margin-bottom: 12px;
+  margin-top: 10px;
   padding: 8px;
   border-radius: 6px;
   border: none;
 }
 
-textarea {
-  resize: none;
-  height: 60px;
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 15px;
-  background: rgba(0,0,0,0.6);
-  color: gold;
+.button-row button {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.danger {
+  background: #dc2626;
+  color: white;
 }
