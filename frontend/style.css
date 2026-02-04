@@ -1,5 +1,5 @@
 /* ===============================
-   GLOBAL
+   GLOBAL RESET
 ================================ */
 * {
   box-sizing: border-box;
@@ -8,106 +8,173 @@
 body {
   margin: 0;
   font-family: 'Cinzel', serif;
-  background: radial-gradient(circle at top, #0b1d2a, #020617);
-  color: #f5f5f5;
+  background:
+    radial-gradient(circle at 20% 10%, #1e293b, transparent 40%),
+    radial-gradient(circle at 80% 0%, #0f172a, transparent 40%),
+    linear-gradient(180deg, #020617, #020617);
+  color: #f8fafc;
+  overflow-x: hidden;
 }
 
 /* ===============================
-   HEADER
+   HERO (GOD-TIER)
 ================================ */
 .hero {
   text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(180deg, #111827, #020617);
-  border-bottom: 2px solid #1f2937;
+  padding: 80px 20px 70px;
+  background:
+    linear-gradient(180deg, rgba(2,6,23,0.9), rgba(2,6,23,1)),
+    url("img/background.png") center/cover no-repeat;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .hero h1 {
-  margin-bottom: 10px;
+  font-size: 48px;
+  margin-bottom: 12px;
+  text-shadow: 0 0 25px rgba(250,204,21,0.4);
 }
 
-.hero button {
-  margin: 10px;
-  padding: 10px 18px;
-  font-size: 16px;
-  cursor: pointer;
-  background: #facc15;
-  border: none;
-  border-radius: 6px;
-}
-
-.hero button:disabled {
-  background: #555;
-  cursor: not-allowed;
-}
-
-#walletAddress {
-  margin-top: 10px;
-  font-size: 14px;
+.hero p {
+  opacity: 0.9;
+  font-size: 18px;
+  margin-bottom: 25px;
 }
 
 /* ===============================
-   SECTIONS
+   BUTTONS (PREMIUM)
+================================ */
+button {
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+#connectWallet {
+  background: linear-gradient(135deg, #facc15, #fde047);
+}
+
+#openMint {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(250,204,21,0.45);
+}
+
+button:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ===============================
+   STATUS BAR
 ================================ */
 section {
-  padding: 30px 40px;
+  padding: 40px 60px;
 }
 
 section h2 {
-  margin-bottom: 20px;
-  border-bottom: 1px solid #334155;
-  padding-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 15px;
+  border-left: 4px solid #facc15;
+  padding-left: 12px;
 }
 
 /* ===============================
-   NFT GRID (HORIZONTAL!)
+   FILTER BAR
+================================ */
+.filters {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #f8fafc;
+  backdrop-filter: blur(6px);
+}
+
+.filters button:hover {
+  background: #facc15;
+  color: #020617;
+}
+
+/* ===============================
+   NFT GRID (HORIZONTAL CAROUSEL)
 ================================ */
 .grid {
   display: flex;
-  gap: 20px;
+  gap: 26px;
   overflow-x: auto;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
   scroll-behavior: smooth;
 }
 
-/* scrollbar styling */
 .grid::-webkit-scrollbar {
   height: 8px;
 }
 .grid::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: linear-gradient(90deg, #facc15, #fde047);
   border-radius: 10px;
 }
 
 /* ===============================
-   NFT CARD
+   NFT CARD (LEGENDARY)
 ================================ */
 .nft {
-  min-width: 240px;
-  background: linear-gradient(180deg, #020617, #020617);
-  border: 1px solid #1e293b;
-  border-radius: 14px;
-  padding: 16px;
+  min-width: 260px;
+  background: rgba(2,6,23,0.7);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 18px;
   text-align: center;
-  box-shadow: 0 0 25px rgba(250, 204, 21, 0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  box-shadow:
+    inset 0 0 25px rgba(255,255,255,0.03),
+    0 0 30px rgba(250,204,21,0.15);
+  transition: all 0.35s ease;
+}
+
+.nft::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(120deg, transparent, rgba(250,204,21,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.nft:hover::before {
+  opacity: 1;
 }
 
 .nft:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 35px rgba(250, 204, 21, 0.35);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 50px rgba(250,204,21,0.45);
 }
 
+/* NFT Image */
 .nft img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  border-radius: 14px;
+  margin-bottom: 12px;
 }
 
+/* NFT Text */
 .nft h3 {
-  margin: 6px 0;
+  margin: 8px 0 4px;
+  font-size: 18px;
 }
 
 .nft p {
@@ -116,25 +183,20 @@ section h2 {
 }
 
 /* ===============================
-   BUTTONS
+   NFT ACTION BUTTONS
 ================================ */
 .nft button {
-  width: 100%;
   margin-top: 10px;
-  padding: 8px;
-  background: #22c55e;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+  width: 100%;
+  background: linear-gradient(135deg, #22c55e, #4ade80);
 }
 
 .nft button:hover {
-  background: #16a34a;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
 /* ===============================
-   MODALS
+   MODALS (GLASS)
 ================================ */
 .modal {
   position: fixed;
@@ -147,35 +209,36 @@ section h2 {
 }
 
 .modal-box {
-  background: #020617;
-  padding: 25px;
-  width: 320px;
-  border-radius: 12px;
-  border: 1px solid #1e293b;
+  background: rgba(2,6,23,0.85);
+  backdrop-filter: blur(18px);
+  padding: 30px;
+  width: 340px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
 .modal-box input,
-.modal-box textarea {
+.modal-box textarea,
+.modal-box select {
   width: 100%;
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 6px;
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
+  background: rgba(255,255,255,0.08);
+  color: white;
 }
 
+/* ===============================
+   BUTTON ROW
+================================ */
 .button-row {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.button-row button {
-  flex: 1;
-  padding: 10px;
-  cursor: pointer;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 .danger {
-  background: #dc2626;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
   color: white;
 }

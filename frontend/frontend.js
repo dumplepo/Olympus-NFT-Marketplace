@@ -1,5 +1,16 @@
 let selectedTokenId = null;
 
+
+
+let activeFilter = "ALL";
+
+function setFilter(type) {
+  activeFilter = type;
+  renderCollections();
+}
+
+
+
 // =======================
 // PINATA CONFIG
 // =======================
@@ -90,6 +101,17 @@ async function renderCollections() {
     const uri = await contract.tokenURI(tokenId);
     const metaRes = await fetch(ipfsToHttp(uri));
     const meta = await metaRes.json();
+    const royaltyInfo = meta.royalty
+    ? `<p>Royalty: ${meta.royalty}%</p>`
+    : "";
+
+    if (
+      activeFilter !== "ALL" &&
+      meta.category !== activeFilter
+    ) {
+      continue;
+    }
+
 
     const card = document.createElement("div");
     card.className = "nft";
@@ -99,8 +121,11 @@ async function renderCollections() {
       <h3>${meta.name}</h3>
       <p>${meta.description}</p>
       <p>ID: ${tokenId}</p>
+      ${royaltyInfo}
       <p>${forSale ? ethers.utils.formatEther(price) + " ETH" : "Not for sale"}</p>
     `;
+
+    
 
     // Buy
     if (forSale && owner.toLowerCase() !== userAddress.toLowerCase()) {
@@ -164,10 +189,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const imageURI = await uploadToPinata(file);
+      const category = document.getElementById("mintCategory").value;
+
       const metadataURI = await uploadMetadataToPinata({
         name,
         description: desc,
-        image: imageURI
+        image: imageURI,
+        creator: userAddress,
+        royalty: 5
       });
 
       await mintNFT(metadataURI);
@@ -184,14 +213,39 @@ document.addEventListener("DOMContentLoaded", () => {
 // ----------------------
 // Sell modal
 // ----------------------
-function openSellModal(tokenId) {
+async function openSellModal(tokenId) {
   selectedTokenId = tokenId;
+
+  const uri = await contract.tokenURI(tokenId);
+  const meta = await (await fetch(ipfsToHttp(uri))).json();
+
+  const royalty = meta.royalty || 0;
+
   openModal("sellModal");
 
   document.getElementById("confirmSellBtn").onclick = async () => {
     const price = document.getElementById("sellPrice").value;
+
+    if (royalty > 0) {
+      alert(`⚠️ ${royalty}% royalty will be paid to creator`);
+    }
+
     await sellNFT(selectedTokenId, price);
+    logActivity("Listed", tokenId, price + " ETH");
     closeModal("sellModal");
     renderCollections();
   };
+}
+
+function toggleFavorite(tokenId) {
+  let favs = JSON.parse(localStorage.getItem("favorites") || "[]");
+
+  if (favs.includes(tokenId)) {
+    favs = favs.filter(id => id !== tokenId);
+  } else {
+    favs.push(tokenId);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favs));
+  renderCollections();
 }
